@@ -6,12 +6,12 @@ class ApiResult<L, R> {
   ApiResult.failure(this.failure) : value = null;
   ApiResult.value(this.value) : failure = null;
 
-  Future<T> when<T>({required T Function(L? failure) onFailure, required T Function(R?) onValue}) {
+  when<T>({required T Function(L? failure) onFailure, required T Function(R?) onValue}) {
     
     if (failure != null) {
-      return Future.value(onFailure(failure));
+      return onFailure(failure);
     } else if (value != null) {
-      return Future.value(onValue(value));
+      return onValue(value);
     } else {
       throw StateError("Both left and right are null.");
     }
